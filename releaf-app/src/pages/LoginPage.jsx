@@ -1,3 +1,9 @@
-export default function LoginPage() {
-  return <div>I am login page</div>;
+import HomePageLayout from "../components/HomePageLayout";
+
+export default function SignupPage() {
+  return (
+    <div className=" w-full flex-grow">
+      <HomePageLayout></HomePageLayout>
+    </div>
+  );
 }

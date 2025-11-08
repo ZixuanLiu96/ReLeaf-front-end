@@ -1,11 +1,13 @@
 import "./App.css";
 import { RouterProvider } from "react-router-dom";
 import router from "./router/index";
+import Footer from "./components/Footer";
 
 function App() {
   return (
-    <div className="App indie-flower-regular bg-[#f0ead6]">
+    <div className="App inter-regular bg-[#f0ead6] flex flex-col min-h-screen">
       <RouterProvider router={router} />
+      <Footer />
     </div>
   );
 }
