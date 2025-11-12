@@ -10,21 +10,60 @@ function AuthProviderWrapper(props) {
   const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState(null);
 
-  useEffect(() => {
-    handleUser();
-  });
-
-  async function handleUser() {
-    const users = await axios.get(`${API_URL}/api/users`);
-    console.log(users);
-  }
-
   const storeToken = (token) => {
     localStorage.setItem("authToken", token);
   };
 
+  const authenticateUser = async () => {
+    const storedToken = localStorage.getItem("authToken");
+    console.log(storedToken);
+
+    if (storedToken) {
+      try {
+        const res = await axios.get(`${API_URL}/api/users/verify`, {
+          headers: { Authorization: `Bearer ${storedToken}` },
+        });
+        const user = res.data.user;
+
+        setIsLoggedIn(true);
+        setIsLoading(false);
+        setUser(user);
+      } catch (err) {
+        setIsLoggedIn(false);
+        setIsLoading(true);
+        setUser(null);
+      }
+    } else {
+      setIsLoggedIn(false);
+      setIsLoading(true);
+      setUser(null);
+    }
+  };
+
+  const removeToken = () => {
+    localStorage.removeItem("authToken");
+  };
+
+  const logOutUser = () => {
+    removeToken();
+    authenticateUser();
+  };
+
+  useEffect(() => {
+    authenticateUser();
+  }, []);
+
   return (
-    <AuthContext.Provider value={{ isLoggedIn, isLoading, user, storeToken }}>
+    <AuthContext.Provider
+      value={{
+        isLoggedIn,
+        isLoading,
+        user,
+        storeToken,
+        authenticateUser,
+        logOutUser,
+      }}
+    >
       {props.children}
     </AuthContext.Provider>
   );

@@ -1,0 +1,24 @@
+:where(.css-dev-only-do-not-override-11mmrso).ant-form-item
+  .ant-form-item-label
+  > label {
+  font-size: large;
+}
+
+:where(.css-dev-only-do-not-override-11mmrso).ant-form-item
+  .ant-form-item-explain-error {
+  color: #a52a2a;
+}
+
+:where(.css-dev-only-do-not-override-11mmrso).ant-btn-variant-solid {
+  background: #005e01;
+}
+
+:where(.css-dev-only-do-not-override-11mmrso).ant-btn-variant-solid:not(
+    :disabled
+  ):not(.ant-btn-disabled):hover {
+  background: #c86e59;
+}
+
+:where(.css-dev-only-do-not-override-11mmrso).ant-btn {
+  font-size: 16px;
+}

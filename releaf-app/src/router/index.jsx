@@ -5,6 +5,7 @@ import LoginPage from "../pages/LoginPage";
 import UserDefaultPage from "../pages/UserDefaultPage";
 import AllPlantsPage from "../pages/AllPlantsPage";
 import ErrorPage from "../pages/ErrorPage";
+import Protect from "../components/Protect";
 
 const router = createBrowserRouter([
   {
@@ -21,14 +22,18 @@ const router = createBrowserRouter([
   },
   {
     path: "/all-plants",
-    element: <AllPlantsPage />,
+    element: (
+      <Protect>
+        <AllPlantsPage />
+      </Protect>
+    ),
   },
   {
-    path: "/:userId",
+    path: "/user/:userId",
     element: <UserDefaultPage />,
   },
   {
-    path: "/*",
+    path: "*",
     element: <ErrorPage />,
   },
 ]);
