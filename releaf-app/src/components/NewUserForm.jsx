@@ -6,7 +6,13 @@ import { Button, Checkbox, Form, Input } from "antd";
 // const onFinishFailed = (errorInfo) => {
 //   console.log("Failed:", errorInfo);
 // };
-const NewUserForm = ({ text, onFinish, onFinishFailed, errorMessage }) => (
+const NewUserForm = ({
+  text,
+  onFinish,
+  onFinishFailed,
+  errorMessage,
+  successMessage,
+}) => (
   <div className="pr-10 mr-20 mt-20 mb-10 bg-[#4caf50] py-20 rounded-md">
     <Form
       name="basic"
@@ -50,6 +56,12 @@ const NewUserForm = ({ text, onFinish, onFinishFailed, errorMessage }) => (
         className="error-message text-sm px-10 h-10 text-[#a52a2a]"
         style={{ whiteSpace: "pre-line" }}
       >{`*${errorMessage}`}</p>
+    )}
+    {successMessage && (
+      <p
+        className="error-message text-sm px-10 h-10 text-[#4bff4a]"
+        style={{ whiteSpace: "pre-line" }}
+      >{`✅${successMessage}, jumping to Log In page...`}</p>
     )}
   </div>
 );

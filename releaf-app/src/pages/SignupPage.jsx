@@ -10,6 +10,7 @@ export default function SignupPage() {
   // console.log(location.pathname);
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState(undefined);
+  const [successMessage, setSuccessMessage] = useState(null);
 
   const onFinish = async (values) => {
     console.log("Success:", values);
@@ -23,7 +24,10 @@ export default function SignupPage() {
       const res = await axios.post(`${API_URL}/api/users/signup`, requestBody);
       console.log(res.data);
 
-      navigate("/login");
+      setSuccessMessage(`${res.data.message}, jumping to Log In page...`);
+      setTimeout(() => {
+        navigate("/login");
+      }, 1000);
     } catch (err) {
       console.log(err);
       console.log(err.response.data.message);
@@ -40,10 +44,11 @@ export default function SignupPage() {
       <HomePageLayout>
         {location.pathname === "/signup" && (
           <NewUserForm
-            text="Sign up"
+            text="Sign Up"
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
             errorMessage={errorMessage}
+            successMessage={successMessage}
           />
         )}
       </HomePageLayout>

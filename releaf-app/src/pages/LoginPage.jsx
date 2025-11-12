@@ -13,6 +13,7 @@ export default function SignupPage() {
   // console.log(location.pathname);
   const navigate = useNavigate();
   const [errorMeaasge, setErrorMessage] = useState(undefined);
+  const [successMessage, setSuccessMessage] = useState(null);
   const { storeToken, authenticateUser } = useContext(AuthContext);
 
   const onFinish = async (values) => {
@@ -31,8 +32,10 @@ export default function SignupPage() {
       console.log(isSuccess);
       storeToken(isSuccess.data.token);
       authenticateUser();
-
-      navigate("/all-plants");
+      setSuccessMessage(`${isSuccess.data.message}, content is ready for you!`);
+      setTimeout(() => {
+        navigate("/all-plants");
+      }, 2000);
     } catch (err) {
       console.log(err.response.data.message);
       const errors = err.response.data.message;
@@ -45,9 +48,10 @@ export default function SignupPage() {
       <HomePageLayout>
         {location.pathname === "/login" && (
           <NewUserForm
-            text="Log in"
+            text="Log In"
             onFinish={onFinish}
             errorMessage={errorMeaasge}
+            successMessage={successMessage}
           />
         )}
       </HomePageLayout>
