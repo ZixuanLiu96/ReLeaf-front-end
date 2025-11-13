@@ -16,7 +16,7 @@ function AuthProviderWrapper(props) {
 
   const authenticateUser = async () => {
     const storedToken = localStorage.getItem("authToken");
-    console.log(storedToken);
+    // console.log(storedToken);
 
     if (storedToken) {
       try {
@@ -32,10 +32,11 @@ function AuthProviderWrapper(props) {
         setIsLoggedIn(false);
         setIsLoading(true);
         setUser(null);
+        console.log(err);
       }
     } else {
       setIsLoggedIn(false);
-      setIsLoading(true);
+      setIsLoading(false);
       setUser(null);
     }
   };

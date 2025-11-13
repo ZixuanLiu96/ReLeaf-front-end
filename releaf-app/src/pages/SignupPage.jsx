@@ -2,7 +2,7 @@ import HomePageLayout from "../components/HomePageLayout";
 import { useLocation, useNavigate } from "react-router-dom";
 import NewUserForm from "../components/NewUserForm";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const API_URL = "http://localhost:5005";
 export default function SignupPage() {
@@ -11,6 +11,10 @@ export default function SignupPage() {
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState(undefined);
   const [successMessage, setSuccessMessage] = useState(null);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const onFinish = async (values) => {
     console.log("Success:", values);

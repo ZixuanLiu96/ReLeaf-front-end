@@ -1,10 +1,16 @@
 import { NavLink, useLocation } from "react-router-dom";
 import HomePageLayout from "../components/HomePageLayout";
 import NewUserForm from "../components/NewUserForm";
+import { useEffect } from "react";
 
 export default function HomePage() {
   const location = useLocation();
   console.log(location.pathname);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="w-full flex-grow">
       <HomePageLayout>

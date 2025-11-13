@@ -1,3 +1,14 @@
+import { useState, useEffect } from "react";
+import MasonryGallery from "../components/MasonryGallery";
+
 export default function AllPlantsPage() {
-  return <div>I am all plants page</div>;
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  return (
+    <div>
+      <MasonryGallery />
+    </div>
+  );
 }

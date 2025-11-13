@@ -4,7 +4,7 @@ import NewUserForm from "../components/NewUserForm";
 import axios from "axios";
 import { useState } from "react";
 import { AuthContext } from "../contexts/auth.context";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
 const API_URL = "http://localhost:5005";
 
@@ -15,6 +15,10 @@ export default function SignupPage() {
   const [errorMeaasge, setErrorMessage] = useState(undefined);
   const [successMessage, setSuccessMessage] = useState(null);
   const { storeToken, authenticateUser } = useContext(AuthContext);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const onFinish = async (values) => {
     console.log("Success:", values);

@@ -61,7 +61,7 @@ const NewUserForm = ({
       <p
         className="error-message text-sm px-10 h-10 text-[#4bff4a]"
         style={{ whiteSpace: "pre-line" }}
-      >{`✅${successMessage}, jumping to Log In page...`}</p>
+      >{`✅${successMessage}`}</p>
     )}
   </div>
 );
