@@ -6,6 +6,7 @@ import UserDefaultPage from "../pages/UserDefaultPage";
 import AllPlantsPage from "../pages/AllPlantsPage";
 import ErrorPage from "../pages/ErrorPage";
 import Protect from "../components/Protect";
+import SinglePlantPage from "../pages/SinglePlantPage";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,12 @@ const router = createBrowserRouter([
         <AllPlantsPage />
       </Protect>
     ),
+    children: [
+      {
+        path: ":plantId",
+        element: <SinglePlantPage />,
+      },
+    ],
   },
   {
     path: "/user/:userId",

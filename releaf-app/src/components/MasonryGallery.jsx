@@ -32,7 +32,7 @@ export default function MasonryGallery() {
   };
 
   return (
-    <div className="w-full px-4 py-6">
+    <div className="w-full px-4 py-6 mt-20">
       <div
         className="columns-1 sm:columns-2 md:columns-3 lg:columns-4
           gap-4 space-y-4
@@ -59,7 +59,7 @@ export default function MasonryGallery() {
                       : "opacity-0 translate-y-8"
                   } `}
                 >
-                  <div className="plant-name">{plant.name}</div>
+                  <div className="plant-name text-md">{plant.name}</div>
                   <div className="plant-status flex items-center">
                     <span
                       className={`w-5 h-5 ${
