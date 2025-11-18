@@ -30,6 +30,7 @@ export default function SinglePlantPage() {
       console.log(err);
     }
   };
+  if (!plants) return <p>Loading...</p>;
   return plants && plants.some((plant) => plant._id == plantId) ? (
     <div className="flex-grow">
       <div className="mt-40">

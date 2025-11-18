@@ -16,7 +16,7 @@ export default function PlantCard({ plantId, API_URL, token }) {
           },
         });
 
-        console.log(res);
+        // console.log(res);
         setPlant(res.data.data.plant);
       } catch (err) {
         console.log(err);
@@ -27,14 +27,43 @@ export default function PlantCard({ plantId, API_URL, token }) {
 
   const handlePlant = async () => {
     try {
-      const editedPlant = await axios.patch(
+      const pendingPlant = await axios.patch(
         `${API_URL}/api/plants/${plantId}`,
+        { ...plant, status: "pending" },
         {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         }
       );
+      // console.log(pendingPlant);
+      setPlant(pendingPlant.data.data.plant);
+      setTimeout(() => {
+        // console.log("1111111");
+
+        adoptedPlant();
+      }, 10000);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const adoptedPlant = async () => {
+    try {
+      const aPlant = await axios.patch(
+        `${API_URL}/api/plants/${plantId}`,
+        {
+          status: "adopted",
+          adoptedBy: user._id,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      // console.log(aPlant);
+      setPlant(aPlant.data.data.plant);
     } catch (err) {
       console.log(err);
     }
@@ -166,19 +195,21 @@ export default function PlantCard({ plantId, API_URL, token }) {
 
           <button
             type="button"
-            className={`rounded-md h-12`}
-            disabled={plant.status === "adopted"}
-            style={{
-              backgroundColor: `${
-                plant.status === "adopted" ? "#c97c5d " : "#4caf50"
-              }`,
-              cursor: plant.status === "adopted" ? "not-allowed" : "pointer",
-            }}
+            className={`rounded-md h-12 hover:bg-[#c97c5d] ${
+              plant.status === "available" ? "bg-[#4caf50]" : "bg-[#c97c5d]"
+            }
+    ${
+      plant.status === "available" ? "hover:bg-green-600" : "hover:bg-[#c97c5d]"
+    }
+    ${plant.status !== "available" ? "cursor-not-allowed" : "cursor-pointer"}`}
+            disabled={plant.status !== "available"}
             onClick={handlePlant}
           >
             {plant.status === "adopted"
               ? "This plant has been adopted!"
-              : "Apply Now"}
+              : plant.status === "available"
+              ? "Apply Now"
+              : "Pending"}
           </button>
         </div>
       </div>

@@ -44,28 +44,6 @@ const router = createBrowserRouter([
       },
     ],
   },
-  // {
-  //   path: "/user/:userId",
-  //   element: (
-  //     <Protect>
-  //       <UserDefaultPage />
-  //     </Protect>
-  //   ),
-  //   children: [
-  //     {
-  //       path: ":userId/my-adoption",
-  //       element: <MyAdoptionPage />,
-  //     },
-  //     {
-  //       path: ":userId/profile",
-  //       element: <ProfilePage />,
-  //     },
-  //     {
-  //       path: "*",
-  //       element: <ErrorPage />,
-  //     },
-  //   ],
-  // },
   {
     path: "/user/:userId/profile",
     element: (
