@@ -6,7 +6,7 @@ import { useState } from "react";
 import { AuthContext } from "../contexts/auth.context";
 import { useContext, useEffect } from "react";
 
-const API_URL = "http://localhost:5005";
+const API_URL = "https://releaf-backend.fly.dev";
 
 export default function SignupPage() {
   const location = useLocation();
@@ -15,6 +15,7 @@ export default function SignupPage() {
   const [errorMeaasge, setErrorMessage] = useState(undefined);
   const [successMessage, setSuccessMessage] = useState(null);
   const { storeToken, authenticateUser } = useContext(AuthContext);
+  const [isClicked, setIsClicked] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -22,6 +23,7 @@ export default function SignupPage() {
 
   const onFinish = async (values) => {
     console.log("Success:", values);
+    setIsClicked(true);
 
     try {
       const requestBody = {
@@ -39,11 +41,12 @@ export default function SignupPage() {
       setSuccessMessage(`${isSuccess.data.message}, content is ready for you!`);
       setTimeout(() => {
         navigate("/all-plants");
-      }, 2000);
+      }, 1000);
     } catch (err) {
       console.log(err.response.data.message);
       const errors = err.response.data.message;
       setErrorMessage(errors);
+      setIsClicked(false);
     }
   };
 
@@ -56,6 +59,7 @@ export default function SignupPage() {
             onFinish={onFinish}
             errorMessage={errorMeaasge}
             successMessage={successMessage}
+            isClicked={isClicked}
           />
         )}
       </HomePageLayout>

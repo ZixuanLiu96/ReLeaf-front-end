@@ -4,13 +4,14 @@ import NewUserForm from "../components/NewUserForm";
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-const API_URL = "http://localhost:5005";
+const API_URL = "https://releaf-backend.fly.dev";
 export default function SignupPage() {
   const location = useLocation();
   // console.log(location.pathname);
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState(undefined);
   const [successMessage, setSuccessMessage] = useState(null);
+  const [isClicked, setIsClicked] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -18,6 +19,7 @@ export default function SignupPage() {
 
   const onFinish = async (values) => {
     console.log("Success:", values);
+    setIsClicked(true);
 
     try {
       const requestBody = {
@@ -31,12 +33,13 @@ export default function SignupPage() {
       setSuccessMessage(`${res.data.message}, jumping to Log In page...`);
       setTimeout(() => {
         navigate("/login");
-      }, 1000);
+      }, 500);
     } catch (err) {
       console.log(err);
       console.log(err.response.data.message);
       const errors = err.response.data.message;
       setErrorMessage(errors);
+      setIsClicked(false);
     }
   };
   const onFinishFailed = (errorInfo) => {
@@ -53,6 +56,7 @@ export default function SignupPage() {
             onFinishFailed={onFinishFailed}
             errorMessage={errorMessage}
             successMessage={successMessage}
+            isClicked={isClicked}
           />
         )}
       </HomePageLayout>

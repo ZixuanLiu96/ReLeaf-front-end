@@ -7,6 +7,11 @@ import AllPlantsPage from "../pages/AllPlantsPage";
 import ErrorPage from "../pages/ErrorPage";
 import Protect from "../components/Protect";
 import SinglePlantPage from "../pages/SinglePlantPage";
+import ProfilePage from "../pages/ProfilePage";
+import MyAdoptionPage from "../pages/MyAdoptionPage";
+import AboutPage from "../pages/AboutPage";
+import HelpPage from "../pages/HelpPage";
+import CreateAdoptionsPage from "../pages/CreateAdoptionsPage";
 
 const router = createBrowserRouter([
   {
@@ -33,11 +38,74 @@ const router = createBrowserRouter([
         path: ":plantId",
         element: <SinglePlantPage />,
       },
+      {
+        path: "*",
+        element: <ErrorPage />,
+      },
     ],
   },
+  // {
+  //   path: "/user/:userId",
+  //   element: (
+  //     <Protect>
+  //       <UserDefaultPage />
+  //     </Protect>
+  //   ),
+  //   children: [
+  //     {
+  //       path: ":userId/my-adoption",
+  //       element: <MyAdoptionPage />,
+  //     },
+  //     {
+  //       path: ":userId/profile",
+  //       element: <ProfilePage />,
+  //     },
+  //     {
+  //       path: "*",
+  //       element: <ErrorPage />,
+  //     },
+  //   ],
+  // },
   {
-    path: "/user/:userId",
-    element: <UserDefaultPage />,
+    path: "/user/:userId/profile",
+    element: (
+      <Protect>
+        <ProfilePage />
+      </Protect>
+    ),
+  },
+
+  {
+    path: "/user/:userId/my-adoptions",
+    element: (
+      <Protect>
+        <MyAdoptionPage />
+      </Protect>
+    ),
+  },
+  {
+    path: "/user/:userId/create-adoptions",
+    element: (
+      <Protect>
+        <CreateAdoptionsPage />
+      </Protect>
+    ),
+  },
+  {
+    path: "/about",
+    element: (
+      <Protect>
+        <AboutPage />
+      </Protect>
+    ),
+  },
+  {
+    path: "/help",
+    element: (
+      <Protect>
+        <HelpPage />
+      </Protect>
+    ),
   },
   {
     path: "*",

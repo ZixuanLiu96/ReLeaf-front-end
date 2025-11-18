@@ -12,6 +12,7 @@ const NewUserForm = ({
   onFinishFailed,
   errorMessage,
   successMessage,
+  isClicked,
 }) => (
   <div className="pr-10 mr-20 mt-20 mb-10 bg-[#4caf50] py-20 rounded-md">
     <Form
@@ -45,7 +46,11 @@ const NewUserForm = ({
       </Form.Item>
 
       <Form.Item label={null}>
-        <Button type="primary" htmlType="submit">
+        <Button
+          type="primary"
+          htmlType="submit"
+          disabled={isClicked ? true : false}
+        >
           {text}
         </Button>
       </Form.Item>

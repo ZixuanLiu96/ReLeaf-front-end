@@ -1,10 +1,8 @@
 import UserNavBar from "../components/UserNavBar";
-
-export default function ProfilePage() {
+export default function HelpPage() {
   return (
     <div className="flex-grow">
       <UserNavBar />
-      <div className="mt-40">I am profile page</div>
     </div>
   );
 }
