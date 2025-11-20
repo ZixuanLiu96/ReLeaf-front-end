@@ -82,8 +82,34 @@ export default function PlantCard({ plantId, API_URL, token }) {
         },
       }
     );
-    console.log(res);
+    // console.log(res);
     setPlant(res.data.data.plant);
+    setTimeout(() => {
+      // console.log(1111111);
+
+      releasePlant();
+    }, 10000);
+  };
+
+  const releasePlant = async () => {
+    try {
+      const aPlant = await axios.patch(
+        `${API_URL}/api/plants/${plantId}`,
+        {
+          status: "available",
+          adoptedBy: null,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      setPlant(aPlant.data.data.plant);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -243,7 +269,11 @@ export default function PlantCard({ plantId, API_URL, token }) {
               disabled={plant.status !== "adopted"}
               onClick={handleReleasePlant}
             >
-              {plant.status === "adopted" ? "Release this plant" : "Pending"}
+              {plant.status === "adopted"
+                ? "Release this plant"
+                : plant.status === "pending"
+                ? "Pending"
+                : "You have successfully released this plant!"}
             </button>
           )}
         </div>
