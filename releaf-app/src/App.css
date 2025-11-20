@@ -13,6 +13,10 @@
   background: #005e01;
 }
 
+:where(.css-11mmrso).ant-btn-variant-solid {
+  background: #005e01;
+}
+
 :where(.css-dev-only-do-not-override-11mmrso).ant-btn-variant-solid:not(
     :disabled
   ):not(.ant-btn-disabled):hover {

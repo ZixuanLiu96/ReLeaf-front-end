@@ -60,6 +60,16 @@ const router = createBrowserRouter([
         <MyAdoptionPage />
       </Protect>
     ),
+    children: [
+      {
+        path: ":plantId",
+        element: <SinglePlantPage />,
+      },
+      {
+        path: "*",
+        element: <ErrorPage />,
+      },
+    ],
   },
   {
     path: "/user/:userId/create-adoptions",

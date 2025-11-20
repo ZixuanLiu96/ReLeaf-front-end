@@ -1,11 +1,12 @@
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../contexts/auth.context";
-import { useContext } from "react";
+import { useLocation } from "react-router-dom";
 
 export default function PlantCard({ plantId, API_URL, token }) {
   const [plant, setPlant] = useState(null);
   const { user } = useContext(AuthContext);
+  const location = useLocation();
 
   useEffect(() => {
     const getPlant = async () => {
@@ -67,6 +68,22 @@ export default function PlantCard({ plantId, API_URL, token }) {
     } catch (err) {
       console.log(err);
     }
+  };
+
+  const handleReleasePlant = async () => {
+    const res = await axios.patch(
+      `${API_URL}/api/plants/${plantId}`,
+      {
+        status: "pending",
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    console.log(res);
+    setPlant(res.data.data.plant);
   };
 
   return (
@@ -193,24 +210,42 @@ export default function PlantCard({ plantId, API_URL, token }) {
             <span>{` ${plant.location || "Empty"}`}</span>
           </div>
 
-          <button
-            type="button"
-            className={`rounded-md h-12 hover:bg-[#c97c5d] ${
-              plant.status === "available" ? "bg-[#4caf50]" : "bg-[#c97c5d]"
-            }
+          {location.pathname === `/all-plants/${plant._id}` && (
+            <button
+              type="button"
+              className={`rounded-md h-12 hover:bg-[#c97c5d] ${
+                plant.status === "available" ? "bg-[#4caf50]" : "bg-[#c97c5d]"
+              }
     ${
       plant.status === "available" ? "hover:bg-green-600" : "hover:bg-[#c97c5d]"
     }
     ${plant.status !== "available" ? "cursor-not-allowed" : "cursor-pointer"}`}
-            disabled={plant.status !== "available"}
-            onClick={handlePlant}
-          >
-            {plant.status === "adopted"
-              ? "This plant has been adopted!"
-              : plant.status === "available"
-              ? "Apply Now"
-              : "Pending"}
-          </button>
+              disabled={plant.status !== "available"}
+              onClick={handlePlant}
+            >
+              {plant.status === "adopted"
+                ? "This plant has been adopted!"
+                : plant.status === "available"
+                ? "Apply Now"
+                : "Pending"}
+            </button>
+          )}
+          {location.pathname ===
+            `/user/${user._id}/my-adoptions/${plant._id}` && (
+            <button
+              type="button"
+              className={`rounded-md h-12 ${
+                plant.status === "adopted" ? "bg-[#4caf50]" : "bg-[#c97c5d]"
+              }
+              
+    ${plant.status === "adopted" ? "hover:bg-green-600" : "hover:bg-[#c97c5d]"}
+    ${plant.status !== "adopted" ? "cursor-not-allowed" : "cursor-pointer"}`}
+              disabled={plant.status !== "adopted"}
+              onClick={handleReleasePlant}
+            >
+              {plant.status === "adopted" ? "Release this plant" : "Pending"}
+            </button>
+          )}
         </div>
       </div>
     )

@@ -88,19 +88,28 @@ export default function UserNavBar({ id }) {
             </NavLink>
             {location.pathname === `/all-plants/${plantId}` && (
               <span className="text-[#a52a2a] hover:underline">
-                {" "}
                 &gt; Plant Details
               </span>
             )}
           </div>
-          <NavLink
-            to={`/user/${user?._id}/my-adoptions`}
-            className={({ isActive }) => `${isActive ? "text-[#a52a2a]" : ""}`}
-          >
-            <span className="hover:text-[#a52a2a] hover:underline">
-              My Adoptions
-            </span>
-          </NavLink>
+          <div>
+            <NavLink
+              to={`/user/${user?._id}/my-adoptions`}
+              className={({ isActive }) =>
+                `${isActive ? "text-[#a52a2a]" : ""}`
+              }
+            >
+              <span className="hover:text-[#a52a2a] hover:underline">
+                My Adoptions
+              </span>
+            </NavLink>
+            {location.pathname ===
+              `/user/${user._id}/my-adoptions/${plantId}` && (
+              <span className="text-[#a52a2a] hover:underline">
+                &gt; Details
+              </span>
+            )}
+          </div>
           <NavLink
             to={`/user/${user?._id}/create-adoptions`}
             className={({ isActive }) => `${isActive ? "text-[#a52a2a]" : ""}`}
