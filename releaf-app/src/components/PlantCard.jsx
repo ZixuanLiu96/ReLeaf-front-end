@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../contexts/auth.context";
 import { useLocation } from "react-router-dom";
+import AdoptionModal from "./AdoptionModal";
 
 export default function PlantCard({ plantId, API_URL, token }) {
   const [plant, setPlant] = useState(null);
@@ -26,49 +27,49 @@ export default function PlantCard({ plantId, API_URL, token }) {
     getPlant();
   }, [API_URL, plantId, token]);
 
-  const handlePlant = async () => {
-    try {
-      const pendingPlant = await axios.patch(
-        `${API_URL}/api/plants/${plantId}`,
-        { ...plant, status: "pending" },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      // console.log(pendingPlant);
-      setPlant(pendingPlant.data.data.plant);
-      setTimeout(() => {
-        // console.log("1111111");
+  // const handlePlant = async () => {
+  //   try {
+  //     const pendingPlant = await axios.patch(
+  //       `${API_URL}/api/plants/${plantId}`,
+  //       { ...plant, status: "pending" },
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //       }
+  //     );
+  //     // console.log(pendingPlant);
+  //     setPlant(pendingPlant.data.data.plant);
+  //     setTimeout(() => {
+  //       // console.log("1111111");
 
-        adoptedPlant();
-      }, 10000);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  //       adoptedPlant();
+  //     }, 10000);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
-  const adoptedPlant = async () => {
-    try {
-      const aPlant = await axios.patch(
-        `${API_URL}/api/plants/${plantId}`,
-        {
-          status: "adopted",
-          adoptedBy: user._id,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      // console.log(aPlant);
-      setPlant(aPlant.data.data.plant);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  // const adoptedPlant = async () => {
+  //   try {
+  //     const aPlant = await axios.patch(
+  //       `${API_URL}/api/plants/${plantId}`,
+  //       {
+  //         status: "adopted",
+  //         adoptedBy: user._id,
+  //       },
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //       }
+  //     );
+  //     // console.log(aPlant);
+  //     setPlant(aPlant.data.data.plant);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
   const handleReleasePlant = async () => {
     const res = await axios.patch(
@@ -237,29 +238,36 @@ export default function PlantCard({ plantId, API_URL, token }) {
           </div>
 
           {location.pathname === `/all-plants/${plant._id}` && (
-            <button
-              type="button"
-              className={`rounded-md h-12 hover:bg-[#c97c5d] ${
-                plant.status === "available" ? "bg-[#4caf50]" : "bg-[#c97c5d]"
-              }
+            <>
+              <button
+                type="button"
+                command="show-modal"
+                commandfor="dialog"
+                className={`rounded-md h-12 hover:bg-[#c97c5d] ${
+                  plant.status === "available" ? "bg-[#4caf50]" : "bg-[#c97c5d]"
+                }
     ${
       plant.status === "available" ? "hover:bg-green-600" : "hover:bg-[#c97c5d]"
     }
     ${plant.status !== "available" ? "cursor-not-allowed" : "cursor-pointer"}`}
-              disabled={plant.status !== "available"}
-              onClick={handlePlant}
-            >
-              {plant.status === "adopted"
-                ? "This plant has been adopted!"
-                : plant.status === "available"
-                ? "Apply Now"
-                : "Pending"}
-            </button>
+                disabled={plant.status !== "available"}
+                // onClick={handlePlant}
+              >
+                {plant.status === "adopted"
+                  ? "This plant has been adopted!"
+                  : plant.status === "available"
+                  ? "Apply Now"
+                  : "Pending"}
+              </button>
+              <AdoptionModal plant={plant} API_URL={API_URL} token={token} />
+            </>
           )}
           {location.pathname ===
             `/user/${user._id}/my-adoptions/${plant._id}` && (
             <button
               type="button"
+              command="show-modal"
+              commandfor="dialog"
               className={`rounded-md h-12 ${
                 plant.status === "adopted" ? "bg-[#4caf50]" : "bg-[#c97c5d]"
               }
