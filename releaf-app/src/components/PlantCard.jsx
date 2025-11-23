@@ -98,9 +98,9 @@ export default function PlantCard({ plantId, API_URL, token }) {
       console.log(res);
       setPlant(res.data.data.plant);
       setAdoption(res.data.data.adoption);
-      setTimeout(() => {
-        adoptedPlant();
-      }, 10000);
+      // setTimeout(() => {
+      //   adoptedPlant();
+      // }, 10000);
     } catch (err) {
       console.log(err);
     }
@@ -162,36 +162,34 @@ export default function PlantCard({ plantId, API_URL, token }) {
       // console.log(resAdoption);
       dialogRef.current.close();
       setPlant(resAdoption.data.data.plant);
-      setTimeout(() => {
-        // console.log(1111111);
-
-        releasePlant();
-      }, 10000);
+      // setTimeout(() => {
+      //   releasePlant();
+      // }, 10000);
     } catch (err) {
       console.log(err);
     }
   };
 
-  const releasePlant = async () => {
-    try {
-      const aPlant = await axios.patch(
-        `${API_URL}/api/plants/${plantId}`,
-        {
-          status: "available",
-          adoptedBy: null,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+  // const releasePlant = async () => {
+  //   try {
+  //     const aPlant = await axios.patch(
+  //       `${API_URL}/api/plants/${plantId}`,
+  //       {
+  //         status: "available",
+  //         adoptedBy: null,
+  //       },
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //       }
+  //     );
 
-      setPlant(aPlant.data.data.plant);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  //     setPlant(aPlant.data.data.plant);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
   return (
     plant && (
