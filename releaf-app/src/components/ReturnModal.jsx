@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { AuthContext } from "../contexts/auth.context";
 
-export default function AdoptionModal({
+export default function ReturnModal({
   handleMessage,
-  handleForm,
+  handleReleasePlant,
   dialogRef,
 }) {
   const [location, setLocation] = useState("Green House");
@@ -23,7 +23,7 @@ export default function AdoptionModal({
           className="flex min-h-full items-end justify-center p-4 text-center focus:outline-none sm:items-center sm:p-0"
         >
           <el-dialog-panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all data-closed:translate-y-4 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in sm:my-8 sm:w-full sm:max-w-lg data-closed:sm:translate-y-0 data-closed:sm:scale-95">
-            <form onSubmit={handleForm}>
+            <form onSubmit={handleReleasePlant}>
               <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4 w-full">
                 <div className="sm:flex sm:items-start ">
                   <div className="mt-3 text-center sm:mt-0 sm:mx-4 sm:text-left w-full">
@@ -31,10 +31,10 @@ export default function AdoptionModal({
                       id="dialog-title"
                       className="text-lg font-semibold text-gray-900 w-full"
                     >
-                      You are adopting a plant
+                      You are releasing a plant
                     </h3>
                     <div className="mt-5 text-base font-md">
-                      <div className="flex flex-col gap-1">
+                      {/* <div className="flex flex-col gap-1">
                         <label htmlFor="location">Location: </label>
                         <input
                           type="text"
@@ -44,20 +44,19 @@ export default function AdoptionModal({
                           className="border-1 border-[#2a2a2a] p-2 rounded-md text-sm"
                           onChange={(e) => setLocation(e.target.value)}
                         />
-                      </div>
+                      </div> */}
 
                       <div className="mt-4 flex flex-col gap-1">
-                        <label htmlFor="message">
-                          Leave your meaasges here (no more than 100
-                          charactors):
+                        <label htmlFor="reason">
+                          Leave your reasons here (no more than 100 charactors):
                         </label>
                         <textarea
-                          id="message"
-                          name="message"
+                          id="reason"
+                          name="reason"
                           className="border-1 border-[#2a2a2a] p-2 rounded-md w-full text-sm"
                           rows="2"
                           maxLength={100}
-                          placeholder="I want to adopt this plant..."
+                          placeholder="I want to return this plant because..."
                           onChange={(e) => handleMessage(e)}
                         ></textarea>
                       </div>
