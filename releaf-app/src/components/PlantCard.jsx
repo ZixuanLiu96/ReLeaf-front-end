@@ -8,6 +8,7 @@ import ReturnModal from "./ReturnModal";
 export default function PlantCard({ plantId, API_URL, token }) {
   const [plant, setPlant] = useState(null);
   const [adoption, setAdoption] = useState(null);
+  const [adoptedUser, setAdoptedUser] = useState(null);
   const { user } = useContext(AuthContext);
   const location = useLocation();
   const [message, setMessage] = useState(null);
@@ -25,6 +26,7 @@ export default function PlantCard({ plantId, API_URL, token }) {
 
         // console.log(res);
         setPlant(res.data.data.plant);
+        setAdoptedUser(res.data.data.plant.adoptedBy.username);
       } catch (err) {
         console.log(err);
       }
@@ -37,7 +39,7 @@ export default function PlantCard({ plantId, API_URL, token }) {
             Authorization: `Bearer ${token}`,
           },
         });
-        console.log(res);
+        // console.log(res);
         setAdoption(
           res.data.data.adoptions.filter(
             (ele) => ele.status === "active" && ele.plantId._id === plantId
@@ -106,26 +108,26 @@ export default function PlantCard({ plantId, API_URL, token }) {
     }
   };
 
-  const adoptedPlant = async () => {
-    try {
-      const aPlant = await axios.patch(
-        `${API_URL}/api/plants/${plantId}`,
-        {
-          status: "adopted",
-          adoptedBy: user._id,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      // console.log(aPlant);
-      setPlant(aPlant.data.data.plant);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  // const adoptedPlant = async () => {
+  //   try {
+  //     const aPlant = await axios.patch(
+  //       `${API_URL}/api/plants/${plantId}`,
+  //       {
+  //         status: "adopted",
+  //         adoptedBy: user._id,
+  //       },
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //       }
+  //     );
+  //     // console.log(aPlant);
+  //     setPlant(aPlant.data.data.plant);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
   const handleReleasePlant = async (e) => {
     e.preventDefault();
@@ -193,12 +195,12 @@ export default function PlantCard({ plantId, API_URL, token }) {
 
   return (
     plant && (
-      <div className="flex mx-10 p-8 gap-12 justify-center items-center">
+      <div className="flex mx-10 p-8 gap-15 justify-center items-center">
         <div
           className="h-110 w-100 bg-center bg-cover rounded-md border-[#c97c5d] border-4 "
           style={{ backgroundImage: `url(${plant.imageUrl})` }}
         ></div>
-        <div className="flex flex-col justify-center gap-5 font-medium text-lg text-[#2a2a2a] ">
+        <div className="flex flex-col w-180 justify-center gap-5 font-medium text-lg text-[#2a2a2a] ">
           <div className="flex gap-2 items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -315,6 +317,26 @@ export default function PlantCard({ plantId, API_URL, token }) {
             <span>{` ${plant.location || "Empty"}`}</span>
           </div>
 
+          {adoptedUser && plant.status === "adopted" && (
+            <div className="flex items-center gap-2">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="size-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                />
+              </svg>
+              <span>{`Adopted by ${adoptedUser}`}</span>
+            </div>
+          )}
+
           {location.pathname === `/all-plants/${plant._id}` && (
             <>
               <button
@@ -329,7 +351,6 @@ export default function PlantCard({ plantId, API_URL, token }) {
     }
     ${plant.status !== "available" ? "cursor-not-allowed" : "cursor-pointer"}`}
                 disabled={plant.status !== "available"}
-                // onClick={handlePlant}
               >
                 {plant.status === "adopted"
                   ? "This plant has been adopted!"
