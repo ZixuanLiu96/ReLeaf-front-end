@@ -26,7 +26,7 @@ export default function PlantCard({ plantId, API_URL, token }) {
 
         // console.log(res);
         setPlant(res.data.data.plant);
-        setAdoptedUser(res.data.data.plant.adoptedBy.username);
+        setAdoptedUser(res.data.data.plant.adoptedBy?.username);
       } catch (err) {
         console.log(err);
       }
@@ -198,7 +198,7 @@ export default function PlantCard({ plantId, API_URL, token }) {
       <div className="flex mx-10 p-8 gap-15 justify-center items-center">
         <div
           className="h-110 w-100 bg-center bg-cover rounded-md border-[#c97c5d] border-4 "
-          style={{ backgroundImage: `url(${plant.imageUrl})` }}
+          style={{ backgroundImage: `url(${plant.imageUrl[0]})` }}
         ></div>
         <div className="flex flex-col w-180 justify-center gap-5 font-medium text-lg text-[#2a2a2a] ">
           <div className="flex gap-2 items-center">

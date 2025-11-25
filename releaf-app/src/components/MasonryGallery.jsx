@@ -19,7 +19,7 @@ export default function MasonryGallery({ plants }) {
                   className={`w-full break-inside-avoid rounded-xl overflow-hidden shadow-md
               hover:scale-[1.03] transition-transform duration-300 cursor-pointer bg-cover bg-center flex items-end`}
                   style={{
-                    backgroundImage: `url(${plant.imageUrl} )`,
+                    backgroundImage: `url(${plant.imageUrl[0]} )`,
                     height: `${plant.randomHeight}px`,
                   }}
                   onMouseEnter={() => setHoverId(plant._id)}
