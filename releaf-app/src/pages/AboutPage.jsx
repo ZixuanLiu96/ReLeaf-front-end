@@ -4,9 +4,9 @@ export default function AboutPage() {
   return (
     <div className="flex-grow">
       <UserNavBar />
-      <div className="mt-40 p-10 flex flex-col justify-center gap-10">
+      <div className="mt-40 px-20 py-10 flex flex-col justify-center gap-10">
         <h1 className="text-4xl font-bold">How to use this app?</h1>
-        <div className="flex items-center gap-20">
+        <div className="flex items-center gap-25">
           <div className="p-4 border-2 border-[#c86e59] rounded-md w-1/2 text-lg">
             <p>
               After logging into the app, you can see all the plants that have
