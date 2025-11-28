@@ -6,22 +6,31 @@ export default function HomePageLayout({ children }) {
     <>
       <NavBar />
 
-      <div className="px-4 mx-auto flex-col text-[#2e2e2e] ">
-        <div className="header w-full flex items-center mb-20 pt-50">
-          <div className="header-left flex flex-col ml-5">
+      <div className="px-20 mx-auto flex-col text-[#2e2e2e] ">
+        <div
+          className="
+            header w-full
+            flex flex-col lg:flex-row 
+            items-center lg:items-start 
+            justify-between
+            gap-10 lg:gap-20
+            mb-20 mt-40
+          "
+        >
+          <div className="header-left flex flex-col w-full">
             <div className="header-welcome ">
-              <h1 className="text-[#4caf50] text-8xl font-semibold">
+              <h1 className="text-[#4caf50] text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-semibold">
                 Welcome to ReLeaf
               </h1>
-              <h1 className="text-[#c97c5d] mt-5 text-xl">
+              <h1 className="text-[#c97c5d] mt-5 text-lg sm:text-xl md:text-2xl">
                 Adopt Your Plant Pal Now!
               </h1>
             </div>
             {children}
           </div>
 
-          <div className="header-right flex flex-col gap-2 ml-auto mr-30 ">
-            <div className="pic-1 w-60 h-70 border-[#c97c5d] border-8 bg-[#f0ead6] flex items-center justify-center origin-top-left -rotate-10  ">
+          <div className="header-right hidden lg:flex flex flex-col gap-2 w-full lg:w-auto ml-auto mr-30 ">
+            <div className="pic-1 w-60 sm:w-52 md:w-60 h-70 border-[#c97c5d] border-8 bg-[#f0ead6] flex items-center justify-center origin-top-left -rotate-10  ">
               <img
                 src="/plant-1.png"
                 alt="plant-1"

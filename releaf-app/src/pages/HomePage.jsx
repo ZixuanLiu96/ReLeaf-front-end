@@ -15,9 +15,9 @@ export default function HomePage() {
       <HomePageLayout>
         {location.pathname === "/" && (
           <>
-            <div className="header-about flex items-center mt-15 ">
+            <div className="header-about flex items-center mt-15 pr-10 ">
               <p
-                className="w-full sm:w-4/5 lg:w-2/3
+                className="w-full sm:w-4/5 lg:w-full
                 text-base sm:text-lg leading-relaxed
                 p-6 sm:p-10
                 rounded-md bg-[#4caf50] text-white "
@@ -31,8 +31,8 @@ export default function HomePage() {
               </p>
             </div>
 
-            <div className="w-full flex flex-col gap-4 mt-10 px-4">
-              <div className="w-full sm:w-4/5 lg:w-2/3 flex flex-col gap-4">
+            <div className="w-full flex flex-col gap-4 mt-10 pr-10">
+              <div className="w-full sm:w-4/5 lg:w-full flex flex-col gap-4">
                 <NavLink
                   to="/login"
                   className={
