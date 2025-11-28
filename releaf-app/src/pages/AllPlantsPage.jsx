@@ -54,6 +54,7 @@ export default function AllPlantsPage() {
   return (
     <div className="flex-grow">
       <UserNavBar plants={plants} />
+
       {location.pathname === "/all-plants" && (
         <SearchBar
           setSearch={setSearch}
@@ -66,7 +67,7 @@ export default function AllPlantsPage() {
       {location.pathname === "/all-plants" && (
         <MasonryGallery plants={plants} />
       )}
-
+      {!plants && <div>Loading...</div>}
       {!plants?.length && <EmptyContent text="Oops, can't find any results" />}
     </div>
   );

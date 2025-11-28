@@ -1,6 +1,5 @@
 import { NavLink, useLocation } from "react-router-dom";
 import HomePageLayout from "../components/HomePageLayout";
-import NewUserForm from "../components/NewUserForm";
 import { useEffect } from "react";
 
 export default function HomePage() {
@@ -17,7 +16,12 @@ export default function HomePage() {
         {location.pathname === "/" && (
           <>
             <div className="header-about flex items-center mt-15 ">
-              <p className="w-3/4 text-lg/9 p-10 rounded-md bg-[#4caf50]  ">
+              <p
+                className="w-full sm:w-4/5 lg:w-2/3
+                text-base sm:text-lg leading-relaxed
+                p-6 sm:p-10
+                rounded-md bg-[#4caf50] text-white "
+              >
                 This is an app for people who want to adopt plants, and also for
                 people who want to give away their plants because of moving,
                 traveling, etc. There are some caring instructions for each
@@ -27,23 +31,25 @@ export default function HomePage() {
               </p>
             </div>
 
-            <div className="w-3/4 btns flex flex-col justify-center gap-5 mt-10 ">
-              <NavLink
-                to="/login"
-                className={
-                  "rounded-full h-12 p-2 border-[#c97c5d] border-solid border-2 text-lg font-semibold flex items-center justify-center tracking-wide hover:bg-[#c97c5d] "
-                }
-              >
-                Have an Account? Go to Log In
-              </NavLink>
-              <NavLink
-                to="/signup"
-                className={
-                  "rounded-full h-12 p-2 border-[#c97c5d] border-solid border-2 text-lg font-semibold flex items-center justify-center tracking-wide hover:bg-[#c97c5d] "
-                }
-              >
-                Create an Account
-              </NavLink>
+            <div className="w-full flex flex-col gap-4 mt-10 px-4">
+              <div className="w-full sm:w-4/5 lg:w-2/3 flex flex-col gap-4">
+                <NavLink
+                  to="/login"
+                  className={
+                    "rounded-full h-12 p-2 border-[#c97c5d] border-solid border-2 text-base sm:text-lg font-semibold flex items-center justify-center tracking-wide hover:bg-[#c97c5d] hover:text-white transition"
+                  }
+                >
+                  Have an Account? Go to Log In
+                </NavLink>
+                <NavLink
+                  to="/signup"
+                  className={
+                    "rounded-full h-12 p-2 border-[#c97c5d] border-solid border-2 text-base sm:text-lg font-semibold flex items-center justify-center tracking-wide hover:bg-[#c97c5d] hover:text-white transition "
+                  }
+                >
+                  Create an Account
+                </NavLink>
+              </div>
             </div>
           </>
         )}

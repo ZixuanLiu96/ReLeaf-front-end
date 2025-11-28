@@ -1,7 +1,7 @@
 export default function SearchBar({ setSearch, getAllPlants, search }) {
   return (
     <div className="mt-40">
-      <div className="px-20 py-5 flex items-center gap-8 text-base">
+      <div className="px-20 py-5 flex items-center gap-10 text-base">
         <div className="flex items-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -27,7 +27,7 @@ export default function SearchBar({ setSearch, getAllPlants, search }) {
           />
         </div>
         <span
-          className="cursor-pointer hover:underline"
+          className="cursor-pointer bg-[#005e01] text-[#fff]  px-2 rounded-md"
           onClick={(e) => {
             setSearch(e.target.innerText);
           }}
@@ -35,7 +35,7 @@ export default function SearchBar({ setSearch, getAllPlants, search }) {
           spider plant
         </span>
         <span
-          className="cursor-pointer hover:underline"
+          className="cursor-pointer bg-[#005e01] text-[#fff]  px-2 rounded-md"
           onClick={(e) => {
             setSearch(e.target.innerText);
           }}
@@ -43,7 +43,7 @@ export default function SearchBar({ setSearch, getAllPlants, search }) {
           ivy
         </span>
         <span
-          className="cursor-pointer hover:underline"
+          className="cursor-pointer bg-[#005e01] text-[#fff]  px-2 rounded-md"
           onClick={(e) => {
             setSearch(e.target.innerText);
           }}
@@ -51,12 +51,20 @@ export default function SearchBar({ setSearch, getAllPlants, search }) {
           chinese money plant
         </span>
         <span
-          className="cursor-pointer hover:underline"
+          className="cursor-pointer bg-[#005e01] text-[#fff] px-2 rounded-md"
           onClick={(e) => {
             setSearch(e.target.innerText);
           }}
         >
           ferns
+        </span>
+        <span
+          className="cursor-pointer bg-[#005e01] text-[#fff] px-2 rounded-md"
+          onClick={(e) => {
+            setSearch(e.target.innerText);
+          }}
+        >
+          sunflwers
         </span>
       </div>
     </div>

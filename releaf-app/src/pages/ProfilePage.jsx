@@ -126,7 +126,16 @@ export default function ProfilePage() {
           <div className="mx-20 py-5 px-40 flex flex-col font-semibold text-[#2a2a2a]">
             <div className="flex items-end gap-5 border-b-1 border-[#aaa] px-4 py-5 ">
               <span>Photo: </span>
-              <Image width={200} alt="basic" src={user.profileUrl} />
+              <Image
+                width={200}
+                height={200}
+                style={{
+                  objectFit: "cover",
+                  borderRadius: "8px",
+                }}
+                alt="basic"
+                src={user.profileUrl}
+              />
               {/* <span>edit</span> */}
             </div>
             <div className="flex items-center gap-5 border-b-1 border-[#aaa] px-4 py-5">
