@@ -52,7 +52,16 @@ export default function MyAdoptionPage() {
               <MasonryGallery plants={plants} />
             </div>
           ) : (
-            <EmptyContent pt={"pt-30"} />
+            <EmptyContent
+              pt={"pt-30"}
+              text={
+                <>
+                  You haven't adopted any plants!
+                  <br />
+                  Go to <a href="/all-plants">All Plants</a>
+                </>
+              }
+            />
           ))}
         <Outlet />
       </div>

@@ -5,6 +5,7 @@ import { Link, Outlet, useLocation } from "react-router-dom";
 import SearchBar from "../components/SearchBar";
 import axios from "axios";
 import { AuthContext } from "../contexts/auth.context";
+import EmptyContent from "../components/EmptyContent";
 
 const API_URL = "https://releaf-backend.fly.dev";
 const token = localStorage.getItem("authToken");
@@ -13,6 +14,7 @@ export default function AllPlantsPage() {
   const location = useLocation();
   const { user } = useContext(AuthContext);
   const [plants, setPlants] = useState(null);
+  const [search, setSearch] = useState("");
   useEffect(() => {
     window.scrollTo(0, 0);
     getAllPlants();
@@ -32,22 +34,40 @@ export default function AllPlantsPage() {
         randomHeight: Math.floor(Math.random() * 200) + 200,
       }));
       setPlants(plantsWithHeight);
+      if (search) {
+        const filterPlants = plantsWithHeight.filter((plant) => {
+          if (plant.name.toLowerCase().includes(search.toLowerCase()))
+            return plant;
+        });
+        console.log(filterPlants);
+        setPlants(filterPlants);
+        setSearch("");
+      }
     } catch (err) {
       console.log(err);
     }
   };
 
   console.log(user);
+  console.log(search);
 
   return (
     <div className="flex-grow">
       <UserNavBar plants={plants} />
-      {location.pathname === "/all-plants" && <SearchBar />}
+      {location.pathname === "/all-plants" && (
+        <SearchBar
+          setSearch={setSearch}
+          getAllPlants={getAllPlants}
+          search={search}
+        />
+      )}
       <Outlet />
 
       {location.pathname === "/all-plants" && (
         <MasonryGallery plants={plants} />
       )}
+
+      {!plants?.length && <EmptyContent text="Oops, can't find any results" />}
     </div>
   );
 }

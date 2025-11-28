@@ -5,7 +5,7 @@ export default function MasonryGallery({ plants }) {
   const [hoverId, setHoverId] = useState(null);
 
   return (
-    <div className="w-full px-4 py-6 mt-20">
+    <div className="w-full px-4 py-5 mt-5">
       <div
         className="columns-1 sm:columns-2 md:columns-3 lg:columns-4
           gap-4 space-y-4

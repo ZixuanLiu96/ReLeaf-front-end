@@ -5,7 +5,7 @@ import {
   useParams,
   Link,
 } from "react-router-dom";
-import { useEffect, useContext } from "react";
+import { useContext } from "react";
 import { AuthContext } from "../contexts/auth.context";
 import { useState } from "react";
 import WarningNotification from "./WarningNotification";

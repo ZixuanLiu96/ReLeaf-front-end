@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { AuthContext } from "../contexts/auth.context";
 
 export default function ReturnModal({
@@ -6,7 +5,7 @@ export default function ReturnModal({
   handleReleasePlant,
   dialogRef,
 }) {
-  const [location, setLocation] = useState("Green House");
+  // const [location, setLocation] = useState("Green House");
 
   return (
     <el-dialog>
