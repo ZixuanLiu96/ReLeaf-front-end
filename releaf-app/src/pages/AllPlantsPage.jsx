@@ -15,6 +15,7 @@ export default function AllPlantsPage() {
   const { user } = useContext(AuthContext);
   const [plants, setPlants] = useState(null);
   const [search, setSearch] = useState("");
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     window.scrollTo(0, 0);
     getAllPlants();
@@ -45,11 +46,15 @@ export default function AllPlantsPage() {
       }
     } catch (err) {
       console.log(err);
+    } finally {
+      setLoading(false);
     }
   };
 
   console.log(user);
   console.log(search);
+
+  if (loading) return <div>Loading...</div>;
 
   return (
     <div className="flex-grow">
@@ -67,8 +72,10 @@ export default function AllPlantsPage() {
       {location.pathname === "/all-plants" && (
         <MasonryGallery plants={plants} />
       )}
-      {!plants && <div>Loading...</div>}
-      {!plants?.length && <EmptyContent text="Oops, can't find any results" />}
+
+      {!loading && !plants?.length && (
+        <EmptyContent text="Oops, can't find any results" />
+      )}
     </div>
   );
 }
