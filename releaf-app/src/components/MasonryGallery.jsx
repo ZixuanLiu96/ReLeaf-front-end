@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
+import LazyBackground from "./LazyBackground";
 
 export default function MasonryGallery({ plants }) {
   const [hoverId, setHoverId] = useState(null);
@@ -15,15 +16,19 @@ export default function MasonryGallery({ plants }) {
           plants.map((plant) => {
             return (
               <NavLink to={`${plant._id}`} className="block" key={plant._id}>
-                <div
-                  className={`w-full break-inside-avoid rounded-xl overflow-hidden shadow-md
+                {/* <div
+                    className={`w-full break-inside-avoid rounded-xl overflow-hidden shadow-md
               hover:scale-[1.03] transition-transform duration-300 cursor-pointer bg-cover bg-center flex items-end`}
-                  style={{
-                    backgroundImage: `url(${plant.imageUrl[0]} )`,
-                    height: `${plant.randomHeight}px`,
-                  }}
-                  onMouseEnter={() => setHoverId(plant._id)}
-                  onMouseLeave={() => setHoverId(null)}
+                    style={{
+                      backgroundImage: `url(${plant.imageUrl[0]} )`,
+                      height: `${plant.randomHeight}px`,
+                    }}
+                    onMouseEnter={() => setHoverId(plant._id)}
+                    onMouseLeave={() => setHoverId(null)}
+                  > */}
+                <LazyBackground
+                  src={plant.imageUrl[0]}
+                  height={`${plant.randomHeight}px`}
                 >
                   <div
                     className={`py-2 px-3 flex flex-col justify-center gap-1 font-semibold bg-white/80 w-full transition-all duration-200 ease-in-out ${
@@ -54,7 +59,8 @@ export default function MasonryGallery({ plants }) {
                       </span>
                     </div>
                   </div>
-                </div>
+                  {/* </div> */}
+                </LazyBackground>
               </NavLink>
             );
           })}
