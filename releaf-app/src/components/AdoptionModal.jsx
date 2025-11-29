@@ -48,7 +48,7 @@ export default function AdoptionModal({
 
                       <div className="mt-4 flex flex-col gap-1">
                         <label htmlFor="message">
-                          Leave your meaasges here (no more than 100
+                          Leave your messages here (no more than 100
                           charactors):
                         </label>
                         <textarea

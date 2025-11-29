@@ -29,6 +29,8 @@ export default function MasonryGallery({ plants }) {
                 <LazyBackground
                   src={plant.imageUrl[0]}
                   height={`${plant.randomHeight}px`}
+                  onMouseEnter={() => setHoverId(plant._id)}
+                  onMouseLeave={() => setHoverId(null)}
                 >
                   <div
                     className={`py-2 px-3 flex flex-col justify-center gap-1 font-semibold bg-white/80 w-full transition-all duration-200 ease-in-out ${

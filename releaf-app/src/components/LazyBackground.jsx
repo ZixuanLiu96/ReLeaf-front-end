@@ -1,6 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 
-export default function LazyBackground({ src, height, children }) {
+export default function LazyBackground({
+  src,
+  height,
+  children,
+  onMouseEnter,
+  onMouseLeave,
+}) {
   const ref = useRef();
   const [visible, setVisible] = useState(false);
 
@@ -31,7 +37,9 @@ export default function LazyBackground({ src, height, children }) {
         backgroundPosition: "center",
         backgroundImage: visible ? `url(${src})` : "none",
       }}
-      className="w-full break-inside-avoid rounded-xl overflow-hidden shadow-md hover:scale-[1.03] transition-transform duration-300 cursor-pointer"
+      className="w-full break-inside-avoid rounded-xl overflow-hidden shadow-md hover:scale-[1.03] transition-transform duration-300 cursor-pointer flex items-end"
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
     >
       {children}
     </div>
